@@ -3,55 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grocery Checkout</title>
+    <title>Click and Drag</title>
+    <style>
+        /* Styling the container and cubes */
+        #container {
+            display: flex;
+        }
+        .cube {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            background-color: lightgray;
+            border: 1px solid #000;
+            transition: background-color 0.2s;
+        }
+        .cube.active {
+            background-color: lightblue;
+        }
+    </style>
 </head>
 <body>
 
-    <table id="groceryTable" border="1">
-        <tr>
-            <th>Item</th>
-            <th>Price</th>
-        </tr>
-        <tr class="item">
-            <td>Apples</td>
-            <td class="prices">2.5</td>
-        </tr>
-        <tr class="item">
-            <td>Bananas</td>
-            <td class="prices">1.2</td>
-        </tr>
-        <tr class="item">
-            <td>Carrots</td>
-            <td class="prices">0.8</td>
-        </tr>
-        <!-- Additional items can be added here -->
-    </table>
-
-    <button onclick="calculateTotal()">Calculate Total</button>
+    <div id="container">
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <div class="cube"></div>
+        <!-- More cubes can be added as needed -->
+    </div>
 
     <script>
-        function calculateTotal() {
-            // Select all elements with the class "prices" to get the prices
-            const prices = document.querySelectorAll('.prices');
-            let total = 0;
+        const cubes = document.querySelectorAll('.cube');
+        let isDragging = false;
 
-            // Sum up all prices
-            prices.forEach(price => {
-                total += parseFloat(price.textContent);
+        // Add event listeners to each cube
+        cubes.forEach(cube => {
+            // Mouse down starts the drag
+            cube.addEventListener('mousedown', () => {
+                isDragging = true;
+                cube.classList.add('active'); // Highlight the cube
             });
 
-            // Create a new row to display the total
-            const totalRow = document.createElement('tr');
-            const totalCell = document.createElement('td');
-            
-            // Set attributes and content for the new row
-            totalCell.setAttribute('colspan', '2'); // Span across both columns
-            totalCell.textContent = `Total Price: $${total.toFixed(2)}`; // Display total with 2 decimal places
-            totalRow.appendChild(totalCell);
+            // Mouse over highlights the cube if dragging is active
+            cube.addEventListener('mouseover', () => {
+                if (isDragging) {
+                    cube.classList.add('active');
+                }
+            });
 
-            // Append the new row to the table
-            document.getElementById('groceryTable').appendChild(totalRow);
-        }
+            // Mouse up ends the drag
+            cube.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+        });
+
+        // Stop dragging when the mouse is released anywhere on the page
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
     </script>
 
 </body>

@@ -3,56 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grocery Checkout</title>
+    <title>Grofers Checkout</title>
 </head>
 <body>
-
-    <table id="groceryTable" border="1">
+    <h3>Grocery List</h3>
+    <table id="groceryTable">
         <tr>
             <th>Item</th>
             <th>Price</th>
         </tr>
         <tr class="item">
-            <td>Apples</td>
-            <td class="prices">2.5</td>
+            <td>Milk</td>
+            <td class="prices">50</td>
         </tr>
         <tr class="item">
-            <td>Bananas</td>
-            <td class="prices">1.2</td>
+            <td>Bread</td>
+            <td class="prices">30</td>
         </tr>
         <tr class="item">
-            <td>Carrots</td>
-            <td class="prices">0.8</td>
+            <td>Eggs</td>
+            <td class="prices">70</td>
         </tr>
-        <!-- Additional items can be added here -->
     </table>
-
     <button onclick="calculateTotal()">Calculate Total</button>
 
-    <script>
-        function calculateTotal() {
-            // Select all elements with the class "prices" to get the prices
-            const prices = document.querySelectorAll('.prices');
-            let total = 0;
-
-            // Sum up all prices
-            prices.forEach(price => {
-                total += parseFloat(price.textContent);
-            });
-
-            // Create a new row to display the total
-            const totalRow = document.createElement('tr');
-            const totalCell = document.createElement('td');
-            
-            // Set attributes and content for the new row
-            totalCell.setAttribute('colspan', '2'); // Span across both columns
-            totalCell.textContent = `Total Price: $${total.toFixed(2)}`; // Display total with 2 decimal places
-            totalRow.appendChild(totalCell);
-
-            // Append the new row to the table
-            document.getElementById('groceryTable').appendChild(totalRow);
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
